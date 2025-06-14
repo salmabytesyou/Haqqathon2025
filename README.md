@@ -1,73 +1,105 @@
-# Welcome to your Lovable project
+# RelationCRM - Personal Relationship Management Platform
 
-## Project info
+A comprehensive personal CRM dashboard that aggregates contacts and interactions from multiple social and professional platforms into a unified interface.
 
-**URL**: https://lovable.dev/projects/f6f3e584-4cf4-4123-b1f5-1c28e26c2dc5
+## Problem Statement
 
-## How can I edit this code?
+Many people interact across multiple platforms (Instagram, LinkedIn, Twitter, etc.) making it difficult to maintain meaningful relationships. RelationCRM provides a centralised dashboard that aggregates contacts, tracks interactions, provides intelligent engagement suggestions, and sends timely reminders while respecting privacy settings.
 
-There are several ways of editing your application.
+## Key Features
 
-**Use Lovable**
+- **Unified Contact Management**: All contacts across platforms in one place with smart categorisation
+- **Platform Integrations**: LinkedIn, Instagram, Twitter, Facebook, GitHub, Slack
+- **AI-Powered Engagement**: Birthday reminders, congratulations prompts, follow-up suggestions
+- **Smart Reminders**: Tiered system organised by priority (Family, Friends, Colleagues)
+- **Privacy & Security**: Secure OAuth, data encryption, granular permission control
+- **Analytics Dashboard**: Relationship insights and engagement metrics
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/f6f3e584-4cf4-4123-b1f5-1c28e26c2dc5) and start prompting.
+## Technology Stack
 
-Changes made via Lovable will be committed automatically to this repo.
+- React 18 with TypeScript
+- Tailwind CSS with shadcn/ui components
+- React Query for state management
+- Vite build tool
+- OAuth 2.0 integration
+- Recharts for analytics
 
-**Use your preferred IDE**
+## Getting Started
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+1. **Clone and install**
+   ```bash
+   git clone <YOUR_GIT_URL>
+   cd <YOUR_PROJECT_NAME>
+   npm install
+   ```
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+2. **Start development**
+   ```bash
+   npm run dev
+   ```
 
-Follow these steps:
+3. **Access application**
+   Open [http://localhost:8080](http://localhost:8080)
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## Available Scripts
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run lint` - Run ESLint
+- `npm run preview` - Preview production build
 
-# Step 3: Install the necessary dependencies.
-npm i
+## Project Structure
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```
+src/
+├── components/crm/      # CRM-specific components
+├── components/ui/       # shadcn/ui components  
+├── hooks/              # Custom React hooks
+├── lib/                # Utility functions
+└── pages/              # Route components
 ```
 
-**Edit a file directly in GitHub**
+## Environment Setup
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+Create `.env` file:
+```env
+VITE_API_BASE_URL=your_api_endpoint
+VITE_LINKEDIN_CLIENT_ID=your_linkedin_client_id
+VITE_INSTAGRAM_CLIENT_ID=your_instagram_client_id
+VITE_TWITTER_CLIENT_ID=your_twitter_client_id
+```
 
-**Use GitHub Codespaces**
+## Core Components
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- **ContactsOverview**: Main contact list with search and filtering
+- **ActivityTimeline**: Chronological view of all interactions  
+- **EngagementSuggestions**: AI-powered relationship recommendations
+- **PlatformIntegrations**: Manage connected social platforms
+- **UpcomingReminders**: Smart reminder system with categorisation
 
-## What technologies are used for this project?
+## Deployment
 
-This project is built with:
+### Production Build
+```bash
+npm run build
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+### Lovable Integration
+- Visit the [Lovable Project](https://lovable.dev/projects/f6f3e584-4cf4-4123-b1f5-1c28e26c2dc5)
+- Use "Share → Publish" for instant deployment
+- Configure custom domains in Project > Settings > Domains
 
-## How can I deploy this project?
+## Security Features
 
-Simply open [Lovable](https://lovable.dev/projects/f6f3e584-4cf4-4123-b1f5-1c28e26c2dc5) and click on Share -> Publish.
+- OAuth 2.0 authentication for secure platform connections
+- AES-256 data encryption
+- Granular permission management per platform
+- Privacy compliance with platform policies
 
-## Can I connect a custom domain to my Lovable project?
+## License
 
-Yes, you can!
+MIT License - see LICENSE file for details.
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+---
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Built for hackathon Problem Statement 6: Personal Relationship CRM for multi-platform social connection management.
