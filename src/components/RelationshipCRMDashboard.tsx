@@ -1,9 +1,8 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Users, Calendar, MessageSquare, TrendingUp, Settings, Bell, Search, Plus, Filter } from 'lucide-react';
+import { Users, Calendar, MessageSquare, TrendingUp, Settings, Bell, Search, Plus, Filter, Activity, UserCheck, Layers, Shield } from 'lucide-react';
 import { ContactsOverview } from './crm/ContactsOverview';
-import { InteractionTimeline } from './crm/InteractionTimeline';
+import { ActivityTimeline } from './crm/ActivityTimeline';
 import { EngagementSuggestions } from './crm/EngagementSuggestions';
 import { PlatformIntegrations } from './crm/PlatformIntegrations';
 import { RelationshipInsights } from './crm/RelationshipInsights';
@@ -11,16 +10,21 @@ import { UpcomingReminders } from './crm/UpcomingReminders';
 import { EnhancedHeader } from './crm/EnhancedHeader';
 import { QuickActions } from './crm/QuickActions';
 import { InteractiveStats } from './crm/InteractiveStats';
+import { ContactsPage } from './crm/ContactsPage';
+import { PrivacySettings } from './crm/PrivacySettings';
 
 const RelationshipCRMDashboard = () => {
-  const [activeTab, setActiveTab] = useState('overview');
+  const [activeTab, setActiveTab] = useState('dashboard');
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const tabs = [
-    { id: 'overview', label: 'Overview', icon: Users },
-    { id: 'interactions', label: 'Interactions', icon: MessageSquare },
-    { id: 'suggestions', label: 'Suggestions', icon: Bell },
-    { id: 'integrations', label: 'Platforms', icon: Settings },
+    { id: 'dashboard', label: 'Dashboard', icon: Users },
+    { id: 'contacts', label: 'Contacts', icon: UserCheck },
+    { id: 'activities', label: 'Activities', icon: Activity },
+    { id: 'engagement', label: 'Engagement', icon: Bell },
+    { id: 'reminders', label: 'Reminders', icon: Calendar },
+    { id: 'platforms', label: 'Platforms', icon: Layers },
+    { id: 'privacy', label: 'Privacy & Settings', icon: Shield },
   ];
 
   return (
@@ -78,22 +82,34 @@ const RelationshipCRMDashboard = () => {
           
           <InteractiveStats />
           
-          <QuickActions />
+          {/* Only show QuickActions on dashboard */}
+          {activeTab === 'dashboard' && <QuickActions />}
 
           {/* Main Dashboard Content */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
-            <div className="lg:col-span-2">
-              {activeTab === 'overview' && <ContactsOverview />}
-              {activeTab === 'interactions' && <InteractionTimeline />}
-              {activeTab === 'suggestions' && <EngagementSuggestions />}
-              {activeTab === 'integrations' && <PlatformIntegrations />}
+          {activeTab === 'reminders' ? (
+            // Full width layout for reminders
+            <div className="mt-6">
+              <UpcomingReminders showAsMainTab={true} />
             </div>
-            
-            <div className="space-y-6">
-              <UpcomingReminders />
-              <RelationshipInsights />
+          ) : (
+            // Grid layout for other tabs
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
+              <div className="lg:col-span-2">
+                {activeTab === 'dashboard' && <ContactsOverview />}
+                {activeTab === 'contacts' && <ContactsPage />}
+                {activeTab === 'activities' && <ActivityTimeline />}
+                {activeTab === 'engagement' && <EngagementSuggestions />}
+                {activeTab === 'platforms' && <PlatformIntegrations />}
+                {activeTab === 'privacy' && <PrivacySettings />}
+              </div>
+              
+              <div className="space-y-6">
+                {/* Show UpcomingReminders sidebar on all tabs except platforms, privacy and reminders */}
+                {activeTab !== 'privacy' && activeTab !== 'reminders' && activeTab !== 'platforms' && <UpcomingReminders />}
+                {activeTab === 'dashboard' && <RelationshipInsights />}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

@@ -4,7 +4,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Settings } from 'lucide-react';
 import { Integration } from './types';
 import { IntegrationItem } from './IntegrationItem';
-import { PrivacyNotice } from './PrivacyNotice';
 
 const PlatformIntegrations = () => {
   const [integrations, setIntegrations] = useState<Integration[]>([
@@ -117,8 +116,6 @@ const PlatformIntegrations = () => {
             />
           ))}
         </div>
-        
-        <PrivacyNotice />
       </CardContent>
     </Card>
   );
