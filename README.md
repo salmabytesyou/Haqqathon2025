@@ -1,4 +1,5 @@
-# RelationCRM - Personal Relationship Management Platform
+# Aligned 
+Personal Relationship Management Platform
 
 A comprehensive personal CRM dashboard that aggregates contacts and interactions from multiple social and professional platforms into a unified interface.
 
