@@ -1,6 +1,8 @@
 # Aligned 
 Personal Relationship Management Platform
 
+![logo](logo.png)
+
 A comprehensive personal CRM dashboard that aggregates contacts and interactions from multiple social and professional platforms into a unified interface.
 
 ## Problem Statement
