@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Calendar } from '@/components/ui/calendar';
-import { Calendar as CalendarIcon, Clock, Users, Bell, Video, CheckSquare, Mail } from 'lucide-react';
+import { Calendar as CalendarIcon, Clock, Users, Bell, Video, CheckSquare, Mail, Camera } from 'lucide-react';
 import { ReminderCategory } from './reminder-types';
 import { ReminderColumn } from './ReminderColumn';
 import { sampleReminders, categoryConfig } from './reminder-data';
+import PhotoUpload from '@/components/PhotoUpload';
 
 const CalendarView = () => {
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [tier1Category, setTier1Category] = useState<ReminderCategory>('family');
   const [tier2Category, setTier2Category] = useState<ReminderCategory>('friends');
+  const [isPhotoUploadOpen, setIsPhotoUploadOpen] = useState(false);
 
   const upcomingEvents = [
     {
@@ -115,6 +117,20 @@ const CalendarView = () => {
     }
   };
 
+  const handlePhotoUpload = (reminders: any[]) => {
+    // Add the new reminders to the sampleReminders array
+    const newReminders = reminders.map((reminder, index) => ({
+      ...reminder,
+      id: sampleReminders.length + index + 1, // Generate new IDs
+    }));
+    
+    // Update the sampleReminders array with the new reminders
+    sampleReminders.push(...newReminders);
+    
+    // Close the photo upload dialog
+    setIsPhotoUploadOpen(false);
+  };
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       {/* Calendar */}
@@ -210,6 +226,15 @@ const CalendarView = () => {
         </CardHeader>
         <CardContent className="pt-0">
           <div className="space-y-4">
+            <div className="flex justify-end mb-4">
+              <button
+                onClick={() => setIsPhotoUploadOpen(true)}
+                className="flex items-center gap-2 px-3 py-1.5 text-sm bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors"
+              >
+                <Camera className="w-4 h-4" />
+                Add from Photo
+              </button>
+            </div>
             <ReminderColumn
               tierNumber={1}
               category={tier1Category}
@@ -227,6 +252,12 @@ const CalendarView = () => {
           </div>
         </CardContent>
       </Card>
+
+      <PhotoUpload
+        isOpen={isPhotoUploadOpen}
+        onClose={() => setIsPhotoUploadOpen(false)}
+        onUpload={handlePhotoUpload}
+      />
     </div>
   );
 };

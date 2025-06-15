@@ -1,0 +1,143 @@
+.photo-upload-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.photo-upload-container h1 {
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.upload-area {
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 2rem;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+  min-height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-area.dragging {
+  border-color: #007bff;
+  background-color: #e9ecef;
+}
+
+.upload-prompt {
+  color: #666;
+}
+
+.upload-prompt p {
+  margin: 0.5rem 0;
+}
+
+.file-input-label {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background-color: #007bff;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1rem;
+}
+
+.file-input-label:hover {
+  background-color: #0056b3;
+}
+
+.file-input {
+  display: none;
+}
+
+.preview-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.preview-image {
+  max-width: 100%;
+  max-height: 400px;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.remove-button {
+  padding: 0.5rem 1rem;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.remove-button:hover {
+  background-color: #c82333;
+}
+
+.processing-indicator {
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: #e9ecef;
+  border-radius: 4px;
+  color: #666;
+  font-style: italic;
+}
+
+.extracted-text-container {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.extracted-text-container h2 {
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.extracted-text {
+  white-space: pre-wrap;
+  font-family: monospace;
+  background-color: white;
+  padding: 1rem;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+  max-height: 300px;
+  overflow-y: auto;
+  color: #000000;
+}
+
+.formatted-reminders-container {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  text-align: left;
+}
+
+.formatted-reminders-container h2 {
+  color: #333;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.formatted-reminders {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+  overflow-x: auto;
+  font-family: monospace;
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: #000000;
+} 
