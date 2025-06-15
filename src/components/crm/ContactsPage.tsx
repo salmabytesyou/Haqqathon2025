@@ -35,7 +35,7 @@ const ContactsPage = () => {
     {
       id: 1,
       name: 'Nour Abdulaziz',
-      email: 'Nour.johnson@company.com',
+      email: 'Nour.abdulaziz@company.com',
       phone: '+1 (555) 123-4567',
       profession: 'Product Manager at TechCorp',
       birthday: 'March 15',
@@ -43,8 +43,8 @@ const ContactsPage = () => {
       tags: ['professional', 'clients'],
       avatar: '/placeholder.svg',
       socialMedia: [
-        { platform: 'LinkedIn', active: true, handle: '@Nourjohnson' },
-        { platform: 'Twitter', active: true, handle: '@Nour_j_pm' },
+        { platform: 'LinkedIn', active: true, handle: '@NourAbdulaziz' },
+        { platform: 'Twitter', active: true, handle: '@Nour_A_pm' },
         { platform: 'Instagram', active: false, handle: '' }
       ]
     },

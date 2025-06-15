@@ -24,7 +24,7 @@ const NotificationDropdown = ({ isOpen, onClose }: NotificationDropdownProps) =>
       id: '1',
       type: 'calendar',
       title: 'Upcoming Meeting',
-      message: 'Coffee with Nour Abdulaziz in 30 minutes',
+      message: 'Coffee with Nour Mukhtar in 30 minutes',
       time: '30m',
       priority: 'high',
       read: false

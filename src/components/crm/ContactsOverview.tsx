@@ -56,8 +56,8 @@ const ContactsOverview = () => {
     },
     {
       id: 4,
-      name: 'David Kim',
-      title: 'UX Designer',
+      name: 'Sophia Hassan',
+      title: 'Consultant',
       platform: 'LinkedIn',
       lastInteraction: '5 days ago',
       relationship: 'Colleague',
@@ -65,7 +65,7 @@ const ContactsOverview = () => {
       tags: ['Design', 'UX', 'Collaboration'],
       location: 'New York, NY',
       engagementScore: 78,
-      email: 'david.kim@design.com',
+      email: 'Sophia.Hassan@design.com',
       phone: '+1 (555) 456-7890'
     }
   ];

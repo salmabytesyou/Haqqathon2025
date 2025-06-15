@@ -6,7 +6,7 @@ export const sampleReminders: Reminder[] = [
   {
     id: 1,
     type: 'birthday',
-    contact: 'Nour Abdulaziz',
+    contact: 'Nour Mukhtar',
     title: 'Birthday',
     date: 'Today',
     time: '',
@@ -42,7 +42,7 @@ export const sampleReminders: Reminder[] = [
   {
     id: 4,
     type: 'anniversary',
-    contact: 'David Kim',
+    contact: 'Sophia Hassan',
     title: 'Work Anniversary',
     date: 'Next Monday',
     time: '',
