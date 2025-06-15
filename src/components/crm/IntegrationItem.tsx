@@ -16,7 +16,19 @@ const IntegrationItem = ({ integration, onConnect, onDisconnect, onSync }: Integ
     <div className="border rounded-lg p-4 hover:shadow-md transition-shadow">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <div className="text-2xl">{integration.icon}</div>
+          <div className="w-8 h-8 flex items-center justify-center">
+            <img 
+              src={integration.icon} 
+              alt={`${integration.name} logo`}
+              className="w-6 h-6 object-contain"
+              onError={(e) => {
+                // Fallback to a generic icon if the image fails to load
+                const target = e.target as HTMLImageElement;
+                target.style.display = 'none';
+                target.parentElement!.innerHTML = '<div class="w-6 h-6 bg-gray-200 rounded flex items-center justify-center text-xs">?</div>';
+              }}
+            />
+          </div>
           <div>
             <h3 className="font-semibold text-gray-900 flex items-center gap-2">
               {integration.name}

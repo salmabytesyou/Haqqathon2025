@@ -29,7 +29,7 @@ const RelationshipInsights = () => {
   ];
 
   const topContacts = [
-    { name: 'Sarah Johnson', interactions: 24, platform: 'LinkedIn' },
+    { name: 'Nour Abdulaziz', interactions: 24, platform: 'LinkedIn' },
     { name: 'Emily Rodriguez', interactions: 18, platform: 'Twitter' },
     { name: 'Mike Chen', interactions: 15, platform: 'Instagram' },
   ];

@@ -3,26 +3,39 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { UserCheck, Mail, Phone, Calendar, MapPin, Briefcase, Instagram, Linkedin, Twitter, MessageSquare, Search, Filter } from 'lucide-react';
 import { ContactInteractions } from './ContactInteractions';
+import { ContactProfile } from './ContactProfile';
 
 const ContactsPage = () => {
   const [selectedTag, setSelectedTag] = useState('all');
   const [selectedContact, setSelectedContact] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
+  const [viewMode, setViewMode] = useState('list'); // 'list' or 'profile'
 
   const tags = [
     { id: 'all', label: 'All', color: 'bg-gray-100 text-gray-700' },
-    { id: 'family', label: 'Family', color: 'bg-red-100 text-red-700' },
-    { id: 'friends', label: 'Friends', color: 'bg-yellow-100 text-yellow-700' },
+    { id: 'family', label: 'Family', color: 'bg-purple-100 text-purple-700' },
+    { id: 'best-friends', label: 'Best Friends', color: 'bg-purple-100 text-purple-700' },
+    { id: 'key-mentors', label: 'Key Mentors', color: 'bg-purple-100 text-purple-700' },
+    { id: 'core-team', label: 'Core Team', color: 'bg-purple-100 text-purple-700' },
     { id: 'professional', label: 'Professional', color: 'bg-blue-100 text-blue-700' },
-    { id: 'clients', label: 'Clients', color: 'bg-green-100 text-green-700' },
-    { id: 'mentors', label: 'Mentors', color: 'bg-purple-100 text-purple-700' }
+    { id: 'colleagues', label: 'Colleagues', color: 'bg-blue-100 text-blue-700' },
+    { id: 'clients', label: 'Clients', color: 'bg-blue-100 text-blue-700' },
+    { id: 'friends', label: 'Friends', color: 'bg-blue-100 text-blue-700' },
+    { id: 'mentors', label: 'Mentors', color: 'bg-blue-100 text-blue-700' },
+    { id: 'industry-contacts', label: 'Industry Contacts', color: 'bg-green-100 text-green-700' },
+    { id: 'conference-connections', label: 'Conference Connections', color: 'bg-green-100 text-green-700' },
+    { id: 'alumni', label: 'Alumni', color: 'bg-green-100 text-green-700' },
+    { id: 'acquaintances', label: 'Acquaintances', color: 'bg-green-100 text-green-700' },
+    { id: 'social-media', label: 'Social Media', color: 'bg-gray-100 text-gray-700' },
+    { id: 'event-attendees', label: 'Event Attendees', color: 'bg-gray-100 text-gray-700' },
+    { id: 'general-network', label: 'General Network', color: 'bg-gray-100 text-gray-700' }
   ];
 
   const contacts = [
     {
       id: 1,
-      name: 'Sarah Johnson',
-      email: 'sarah.johnson@company.com',
+      name: 'Nour Abdulaziz',
+      email: 'Nour.johnson@company.com',
       phone: '+1 (555) 123-4567',
       profession: 'Product Manager at TechCorp',
       birthday: 'March 15',
@@ -30,8 +43,8 @@ const ContactsPage = () => {
       tags: ['professional', 'clients'],
       avatar: '/placeholder.svg',
       socialMedia: [
-        { platform: 'LinkedIn', active: true, handle: '@sarahjohnson' },
-        { platform: 'Twitter', active: true, handle: '@sarah_j_pm' },
+        { platform: 'LinkedIn', active: true, handle: '@Nourjohnson' },
+        { platform: 'Twitter', active: true, handle: '@Nour_j_pm' },
         { platform: 'Instagram', active: false, handle: '' }
       ]
     },
@@ -75,7 +88,7 @@ const ContactsPage = () => {
       profession: 'Business Consultant',
       birthday: 'February 14',
       location: 'New York, NY',
-      tags: ['professional', 'mentors'],
+      tags: ['professional', 'key-mentors'],
       avatar: '/placeholder.svg',
       socialMedia: [
         { platform: 'LinkedIn', active: true, handle: '@davidkim' },
@@ -107,7 +120,7 @@ const ContactsPage = () => {
       profession: 'Travel Photographer',
       birthday: 'September 3',
       location: 'Los Angeles, CA',
-      tags: ['friends'],
+      tags: ['best-friends'],
       avatar: '/placeholder.svg',
       socialMedia: [
         { platform: 'LinkedIn', active: false, handle: '' },
@@ -137,8 +150,12 @@ const ContactsPage = () => {
     }
   };
 
-  if (selectedContact) {
+  if (selectedContact && viewMode === 'interactions') {
     return <ContactInteractions contact={selectedContact} onBack={() => setSelectedContact(null)} />;
+  }
+
+  if (selectedContact && viewMode === 'profile') {
+    return <ContactProfile contact={selectedContact} onBack={() => setSelectedContact(null)} />;
   }
 
   return (
@@ -168,7 +185,7 @@ const ContactsPage = () => {
           <div className="flex items-center gap-2">
             <Filter className="w-4 h-4 text-gray-600" />
             <div className="flex flex-wrap gap-2">
-              {tags.map((tag) => (
+              {tags.slice(0, 8).map((tag) => (
                 <button
                   key={tag.id}
                   onClick={() => setSelectedTag(tag.id)}
@@ -195,7 +212,15 @@ const ContactsPage = () => {
                   {contact.name.charAt(0)}
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-semibold text-gray-900">{contact.name}</h3>
+                  <button
+                    onClick={() => {
+                      setSelectedContact(contact);
+                      setViewMode('profile');
+                    }}
+                    className="font-semibold text-gray-900 hover:text-blue-600 hover:underline transition-colors text-left"
+                  >
+                    {contact.name}
+                  </button>
                   <p className="text-sm text-gray-600">{contact.profession}</p>
                 </div>
               </div>
@@ -247,14 +272,29 @@ const ContactsPage = () => {
                 </div>
               </div>
 
-              {/* CTA Button */}
-              <button
-                onClick={() => setSelectedContact(contact)}
-                className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
-              >
-                <MessageSquare className="w-4 h-4" />
-                View Interactions
-              </button>
+              {/* Action Buttons */}
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  onClick={() => {
+                    setSelectedContact(contact);
+                    setViewMode('profile');
+                  }}
+                  className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 text-sm"
+                >
+                  <UserCheck className="w-4 h-4" />
+                  View Profile
+                </button>
+                <button
+                  onClick={() => {
+                    setSelectedContact(contact);
+                    setViewMode('interactions');
+                  }}
+                  className="bg-gray-600 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition-colors flex items-center justify-center gap-2 text-sm"
+                >
+                  <MessageSquare className="w-4 h-4" />
+                  Interactions
+                </button>
+              </div>
             </div>
           ))}
         </div>

@@ -24,12 +24,12 @@ export const ReminderColumn = ({
   const tierReminders = reminders.filter(reminder => reminder.category === category);
 
   return (
-    <div className="flex-1 bg-white rounded-lg border border-gray-200 shadow-sm">
-      <div className="p-4 border-b border-gray-100">
+    <div className="bg-gray-50 rounded-lg border border-gray-200 shadow-sm">
+      <div className="p-3 border-b border-gray-100">
         <div className="flex items-center justify-between mb-2">
           <div className="flex items-center gap-2">
-            <Icon className={`w-5 h-5 ${config.color}`} />
-            <h3 className="font-semibold text-gray-900">Tier {tierNumber}</h3>
+            <Icon className={`w-4 h-4 ${config.color}`} />
+            <h4 className="font-medium text-gray-900 text-sm">Tier {tierNumber}</h4>
           </div>
           <CategorySelector 
             value={category} 
@@ -37,18 +37,18 @@ export const ReminderColumn = ({
             categoryConfig={categoryConfig} 
           />
         </div>
-        <p className="text-sm text-gray-500">{config.label} reminders</p>
+        <p className="text-xs text-gray-500">{config.label} reminders</p>
       </div>
 
-      <div className="p-4 space-y-3 min-h-[400px]">
+      <div className="p-3 space-y-2 min-h-[200px]">
         {tierReminders.length > 0 ? (
-          tierReminders.map((reminder) => (
-            <ReminderItem key={reminder.id} reminder={reminder} />
+          tierReminders.slice(0, 3).map((reminder) => (
+            <ReminderItem key={reminder.id} reminder={reminder} compact={true} />
           ))
         ) : (
-          <div className="text-center py-12 text-gray-500">
-            <Icon className={`w-12 h-12 mx-auto mb-3 ${config.color} opacity-30`} />
-            <p className="text-sm font-medium">No {config.label.toLowerCase()} reminders</p>
+          <div className="text-center py-8 text-gray-500">
+            <Icon className={`w-8 h-8 mx-auto mb-2 ${config.color} opacity-30`} />
+            <p className="text-xs font-medium">No {config.label.toLowerCase()} reminders</p>
             <p className="text-xs text-gray-400 mt-1">All caught up!</p>
           </div>
         )}

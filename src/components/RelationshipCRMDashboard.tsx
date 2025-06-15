@@ -1,17 +1,21 @@
+
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Users, Calendar, MessageSquare, TrendingUp, Settings, Bell, Search, Plus, Filter, Activity, UserCheck, Layers, Shield } from 'lucide-react';
+import { Users, Calendar, MessageSquare, TrendingUp, Settings, Bell, Search, Plus, Filter, Activity, UserCheck, Layers, Shield, BarChart3 } from 'lucide-react';
 import { ContactsOverview } from './crm/ContactsOverview';
 import { ActivityTimeline } from './crm/ActivityTimeline';
 import { EngagementSuggestions } from './crm/EngagementSuggestions';
 import { PlatformIntegrations } from './crm/PlatformIntegrations';
 import { RelationshipInsights } from './crm/RelationshipInsights';
 import { UpcomingReminders } from './crm/UpcomingReminders';
+import { TagTiersManager } from './crm/TagTiersManager';
 import { EnhancedHeader } from './crm/EnhancedHeader';
 import { QuickActions } from './crm/QuickActions';
 import { InteractiveStats } from './crm/InteractiveStats';
+import { WeeklyCalendarView } from './crm/WeeklyCalendarView';
 import { ContactsPage } from './crm/ContactsPage';
 import { PrivacySettings } from './crm/PrivacySettings';
+import { CalendarView } from './crm/CalendarView';
 
 const RelationshipCRMDashboard = () => {
   const [activeTab, setActiveTab] = useState('dashboard');
@@ -22,7 +26,8 @@ const RelationshipCRMDashboard = () => {
     { id: 'contacts', label: 'Contacts', icon: UserCheck },
     { id: 'activities', label: 'Activities', icon: Activity },
     { id: 'engagement', label: 'Engagement', icon: Bell },
-    { id: 'reminders', label: 'Reminders', icon: Calendar },
+    { id: 'calendar', label: 'Calendar', icon: Calendar },
+    { id: 'insights', label: 'Insights', icon: BarChart3 },
     { id: 'platforms', label: 'Platforms', icon: Layers },
     { id: 'privacy', label: 'Privacy & Settings', icon: Shield },
   ];
@@ -34,12 +39,16 @@ const RelationshipCRMDashboard = () => {
         <div className={`${sidebarOpen ? 'w-64' : 'w-16'} transition-all duration-300 bg-white shadow-lg h-screen sticky top-0`}>
           <div className="p-4">
             <div className="flex items-center gap-3 mb-8">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <Users className="w-5 h-5 text-white" />
+              <div className="w-12 h-12 flex items-center justify-center">
+                <img 
+                  src="/lovable-uploads/caa18add-8ec0-4057-ace3-6274219cc3ee.png" 
+                  alt="Aligned Logo" 
+                  className="w-12 h-12 object-contain"
+                />
               </div>
               {sidebarOpen && (
                 <div>
-                  <h1 className="text-lg font-bold text-gray-900">RelationCRM</h1>
+                  <h1 className="text-lg font-bold text-gray-900">Aligned</h1>
                   <p className="text-xs text-gray-500">Relationship Manager</p>
                 </div>
               )}
@@ -80,16 +89,23 @@ const RelationshipCRMDashboard = () => {
         <div className="flex-1 p-6">
           <EnhancedHeader />
           
-          <InteractiveStats />
+          {/* Show WeeklyCalendarView on all tabs except insights */}
+          {activeTab !== 'insights' && <WeeklyCalendarView />}
+          
+          {/* Show InteractiveStats only on insights tab */}
+          {activeTab === 'insights' && <InteractiveStats />}
           
           {/* Only show QuickActions on dashboard */}
           {activeTab === 'dashboard' && <QuickActions />}
 
           {/* Main Dashboard Content */}
-          {activeTab === 'reminders' ? (
-            // Full width layout for reminders
+          {(['privacy', 'platforms', 'insights', 'calendar'].includes(activeTab)) ? (
+            // Full width layout for privacy, platforms, insights, and calendar
             <div className="mt-6">
-              <UpcomingReminders showAsMainTab={true} />
+              {activeTab === 'privacy' && <PrivacySettings />}
+              {activeTab === 'platforms' && <PlatformIntegrations />}
+              {activeTab === 'insights' && <RelationshipInsights />}
+              {activeTab === 'calendar' && <CalendarView />}
             </div>
           ) : (
             // Grid layout for other tabs
@@ -99,14 +115,14 @@ const RelationshipCRMDashboard = () => {
                 {activeTab === 'contacts' && <ContactsPage />}
                 {activeTab === 'activities' && <ActivityTimeline />}
                 {activeTab === 'engagement' && <EngagementSuggestions />}
-                {activeTab === 'platforms' && <PlatformIntegrations />}
-                {activeTab === 'privacy' && <PrivacySettings />}
               </div>
               
               <div className="space-y-6">
-                {/* Show UpcomingReminders sidebar on all tabs except platforms, privacy and reminders */}
-                {activeTab !== 'privacy' && activeTab !== 'reminders' && activeTab !== 'platforms' && <UpcomingReminders />}
-                {activeTab === 'dashboard' && <RelationshipInsights />}
+                {/* Show UpcomingReminders sidebar on all tabs except full-width tabs and contacts tab */}
+                {!['privacy', 'platforms', 'insights', 'calendar', 'contacts'].includes(activeTab) && <UpcomingReminders />}
+                
+                {/* Show TagTiersManager beneath reminders on all tabs except full-width tabs */}
+                {!['privacy', 'platforms', 'insights', 'calendar'].includes(activeTab) && <TagTiersManager />}
               </div>
             </div>
           )}

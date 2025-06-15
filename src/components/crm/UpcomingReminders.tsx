@@ -1,7 +1,9 @@
 
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Bell, Settings } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { Bell, Plus, Edit, Camera } from 'lucide-react';
 import { ReminderCategory } from './reminder-types';
 import { ReminderColumn } from './ReminderColumn';
 import { ReminderItem } from './ReminderItem';
@@ -15,6 +17,35 @@ const UpcomingReminders = ({ showAsMainTab = false }: UpcomingRemindersProps) =>
   const [tier1Category, setTier1Category] = useState<ReminderCategory>('family');
   const [tier2Category, setTier2Category] = useState<ReminderCategory>('friends');
   const [tier3Category, setTier3Category] = useState<ReminderCategory>('colleagues');
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  const handleManualEntry = () => {
+    setDialogOpen(false);
+    console.log('Manual entry selected');
+    // Here you would typically open a form for manual entry
+    alert('Manual entry form would open here.');
+  };
+
+  const handleImageUpload = () => {
+    setDialogOpen(false);
+    // Create a file input element
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.capture = 'environment'; // Use camera if available
+    
+    input.onchange = (event) => {
+      const file = (event.target as HTMLInputElement).files?.[0];
+      if (file) {
+        console.log('Image captured:', file.name);
+        // Here you would typically process the image for text extraction
+        alert('Image captured! Text processing would happen here.');
+      }
+    };
+    
+    // Trigger the file input
+    input.click();
+  };
 
   if (showAsMainTab) {
     return (
@@ -26,7 +57,42 @@ const UpcomingReminders = ({ showAsMainTab = false }: UpcomingRemindersProps) =>
                 <Bell className="w-5 h-5" />
                 Reminders
               </div>
-              <Settings className="w-4 h-4 text-gray-400" />
+              <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+                <DialogTrigger asChild>
+                  <Button className="bg-blue-500 hover:bg-blue-600 text-white">
+                    Add Reminder
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-md">
+                  <DialogHeader>
+                    <DialogTitle>Add New Reminder</DialogTitle>
+                  </DialogHeader>
+                  <div className="flex flex-col gap-4 py-4">
+                    <Button
+                      onClick={handleManualEntry}
+                      className="flex items-center gap-2 justify-start p-4 h-auto"
+                      variant="outline"
+                    >
+                      <Edit className="w-5 h-5" />
+                      <div className="text-left">
+                        <div className="font-medium">Manual Entry</div>
+                        <div className="text-sm text-gray-500">Create a reminder by typing details</div>
+                      </div>
+                    </Button>
+                    <Button
+                      onClick={handleImageUpload}
+                      className="flex items-center gap-2 justify-start p-4 h-auto"
+                      variant="outline"
+                    >
+                      <Camera className="w-5 h-5" />
+                      <div className="text-left">
+                        <div className="font-medium">Upload Image</div>
+                        <div className="text-sm text-gray-500">Extract reminder from image or document</div>
+                      </div>
+                    </Button>
+                  </div>
+                </DialogContent>
+              </Dialog>
             </CardTitle>
             <CardDescription>
               Organize your reminders by priority tiers
@@ -66,7 +132,7 @@ const UpcomingReminders = ({ showAsMainTab = false }: UpcomingRemindersProps) =>
     );
   }
 
-  // Sidebar version - compact layout
+  // Sidebar version - compact layout (no add button)
   return (
     <Card className="bg-white">
       <CardHeader>

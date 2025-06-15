@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Users, Calendar, MessageSquare, TrendingUp, ArrowUp, ArrowDown } from 'lucide-react';
@@ -23,7 +22,7 @@ const InteractiveStats = () => {
       change: '+5%', 
       trend: 'up',
       color: 'from-green-500 to-green-600',
-      details: '24 messages, 35 likes, 30 comments'
+      details: '24 messages, 35 likes, 30 comments this month'
     },
     { 
       icon: Calendar, 
@@ -32,7 +31,7 @@ const InteractiveStats = () => {
       change: '+8%', 
       trend: 'up',
       color: 'from-purple-500 to-purple-600',
-      details: '8 meetings, 4 birthdays, 3 anniversaries'
+      details: '8 meetings, 4 birthdays, 3 anniversaries this month'
     },
     { 
       icon: TrendingUp, 

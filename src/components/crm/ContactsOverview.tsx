@@ -2,17 +2,19 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Search, Filter, MoreVertical, MessageSquare, Calendar, MapPin, Star, Phone, Mail } from 'lucide-react';
+import { ContactProfile } from './ContactProfile';
 
 const ContactsOverview = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedFilter, setSelectedFilter] = useState('all');
   const [viewMode, setViewMode] = useState('grid');
   const [favoriteContacts, setFavoriteContacts] = useState(new Set([1, 3]));
+  const [selectedContact, setSelectedContact] = useState(null);
 
   const contacts = [
     {
       id: 1,
-      name: 'Sarah Johnson',
+      name: 'Nour Abdulaziz',
       title: 'Product Manager at Google',
       platform: 'LinkedIn',
       lastInteraction: '2 days ago',
@@ -21,7 +23,7 @@ const ContactsOverview = () => {
       tags: ['Product', 'Tech', 'Mentor'],
       location: 'San Francisco, CA',
       engagementScore: 85,
-      email: 'sarah.j@google.com',
+      email: 'Nour.j@google.com',
       phone: '+1 (555) 123-4567'
     },
     {
@@ -99,6 +101,11 @@ const ContactsOverview = () => {
     setFavoriteContacts(newFavorites);
   };
 
+  // If a contact is selected, show their detailed profile
+  if (selectedContact) {
+    return <ContactProfile contact={selectedContact} onBack={() => setSelectedContact(null)} />;
+  }
+
   return (
     <Card className="bg-white">
       <CardHeader>
@@ -150,7 +157,12 @@ const ContactsOverview = () => {
                   </div>
                   <div className="flex-1">
                     <div className="flex items-center gap-2">
-                      <h3 className="font-semibold text-gray-900">{contact.name}</h3>
+                      <button
+                        onClick={() => setSelectedContact(contact)}
+                        className="font-semibold text-gray-900 hover:text-blue-600 hover:underline transition-colors"
+                      >
+                        {contact.name}
+                      </button>
                       <button
                         onClick={() => toggleFavorite(contact.id)}
                         className={`p-1 rounded-full transition-colors ${

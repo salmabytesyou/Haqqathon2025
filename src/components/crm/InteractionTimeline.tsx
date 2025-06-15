@@ -9,7 +9,7 @@ const InteractionTimeline = () => {
       id: 1,
       type: 'message',
       platform: 'LinkedIn',
-      contact: 'Sarah Johnson',
+      contact: 'Nour Abdulaziz',
       action: 'sent you a message about the product launch',
       timestamp: '2 hours ago',
       content: 'Hey! Saw your latest post about AI in product development. Would love to chat more about this...',
@@ -50,7 +50,7 @@ const InteractionTimeline = () => {
       type: 'event',
       platform: 'Calendar',
       contact: 'Team Meeting',
-      action: 'upcoming call with Sarah Johnson',
+      action: 'upcoming call with Nour Abdulaziz',
       timestamp: 'Tomorrow at 2 PM',
       content: 'Product roadmap discussion - Q2 planning',
       avatar: '/placeholder.svg'
